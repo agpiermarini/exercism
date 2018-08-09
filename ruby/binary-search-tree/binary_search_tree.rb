@@ -15,4 +15,15 @@ class Bst
       self.right ? self.right.insert(value) : self.right = Bst.new(value)
     end
   end
+
+  def each(&block)
+    return to_enum unless block_given?
+    self.left.each(&block) if self.left
+    yield(data)
+    self.right.each(&block) if self.right
+  end
+end
+
+module BookKeeping
+  VERSION = 1
 end
