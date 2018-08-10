@@ -8,7 +8,7 @@ class Alphametics
 
     left = left.split(' + ').map! { | word | word.split('') }
 
-    unique_chars = (left + right).flatten.uniq.sort
+    unique_chars = (left + right).flatten.uniq
 
     (0..9).to_a.combination(unique_chars.length).map do | comb |
       comb.permutation.each do | perm |
@@ -25,7 +25,7 @@ class Alphametics
           word.map { | letter | values[letter] }.join('').to_i
         end.sum
 
-        right_sum = right.map { | letter | values[letter].to_s }.join('').to_i
+        right_sum = right.map { | letter | values[letter] }.join('').to_i
 
         return values if (left_sum == right_sum)
       end
