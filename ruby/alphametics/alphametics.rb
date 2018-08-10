@@ -22,7 +22,7 @@ class Alphametics
         next if values[left[0][0]] == 0 || values[right[0]] == 0
 
         left_sum = left.map do | word |
-          word.map { | letter | values[letter].to_s }.join('').to_i
+          word.map { | letter | values[letter] }.join('').to_i
         end.sum
 
         right_sum = right.map { | letter | values[letter].to_s }.join('').to_i
