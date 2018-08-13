@@ -2,7 +2,7 @@ class Alphametics
   def self.solve(input)
     left, right = input.split(" == ")
 
-    return {} if left.length == 1 && right.length == 1 && right[0] == left[0]
+    return {} if left.length == 1 && right.length == 1 && right[0] != left[0]
 
     right = right.split('')
 
