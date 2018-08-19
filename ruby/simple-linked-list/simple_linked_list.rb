@@ -17,8 +17,9 @@ class SimpleLinkedList
   end
 
   def push(node = @head, element)
-    @head = element and return self if @head.nil?
-    node.next ? push(node.next, element) : node.next = element and return self
+    return set_head(element) if @head.nil?
+    node.next ? push(node.next, element) : node.next = element
+    self
   end
 
   def pop(node = @head)
@@ -29,7 +30,7 @@ class SimpleLinkedList
 
   def to_a(node = @head)
     return all_datum if node.nil?
-    all_datum.unshift(node.datum)
+    all_datum.insert(0, node.datum)
     to_a(node.next)
   end
 
@@ -47,6 +48,11 @@ class SimpleLinkedList
     def rebuild_list(nodes)
       @all_datum = []
       nodes.each { | node | push(node) }
+      self
+    end
+
+    def set_head(element)
+      @head = element
       self
     end
 
