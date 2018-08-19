@@ -4,7 +4,7 @@ require_relative 'bracket_push'
 # Common test data version: 1.1.0 855c591
 class BracketPushTest < Minitest::Test
   def test_paired_square_brackets
-    # skip
+    skip
     assert Brackets.paired?('[]')
   end
 
@@ -69,7 +69,7 @@ class BracketPushTest < Minitest::Test
   end
 
   def test_complex_latex_expression
-    skip
+    # skip
     str = '\left(\begin{array}{cc} \frac{1}{3} & x\\ '\
           '\mathrm{e}^{x} &... x^2 \end{array}\right)'
     assert Brackets.paired?(str)
