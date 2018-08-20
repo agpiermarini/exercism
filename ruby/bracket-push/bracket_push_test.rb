@@ -4,67 +4,67 @@ require_relative 'bracket_push'
 # Common test data version: 1.1.0 855c591
 class BracketPushTest < Minitest::Test
   def test_paired_square_brackets
-    skip
+    # skip
     assert Brackets.paired?('[]')
   end
 
   def test_empty_string
-    skip
+    # skip
     assert Brackets.paired?('')
   end
 
   def test_unpaired_brackets
-    skip
+    # skip
     refute Brackets.paired?('[[')
   end
 
   def test_wrong_ordered_brackets
-    skip
+    # skip
     refute Brackets.paired?('}{')
   end
 
   def test_wrong_closing_bracket
-    skip
+    # skip
     refute Brackets.paired?('{]')
   end
 
   def test_paired_with_whitespace
-    skip
+    # skip
     assert Brackets.paired?('{ }')
   end
 
   def test_simple_nested_brackets
-    skip
+    # skip
     assert Brackets.paired?('{[]}')
   end
 
   def test_several_paired_brackets
-    skip
+    # skip
     assert Brackets.paired?('{}[]')
   end
 
   def test_paired_and_nested_brackets
-    skip
+    # skip
     assert Brackets.paired?('([{}({}[])])')
   end
 
   def test_unopened_closing_brackets
-    skip
+    # skip
     refute Brackets.paired?('{[)][]}')
   end
 
   def test_unpaired_and_nested_brackets
-    skip
+    # skip
     refute Brackets.paired?('([{])')
   end
 
   def test_paired_and_wrong_nested_brackets
-    skip
+    # skip
     refute Brackets.paired?('[({]})')
   end
 
   def test_math_expression
-    skip
+    # skip
     assert Brackets.paired?('(((185 + 223.85) * 15) - 543)/2')
   end
 
@@ -93,7 +93,7 @@ class BracketPushTest < Minitest::Test
   # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
 
   def test_bookkeeping
-    skip
+    # skip
     assert_equal 4, BookKeeping::VERSION
   end
 end
