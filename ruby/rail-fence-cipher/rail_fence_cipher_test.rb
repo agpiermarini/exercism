@@ -4,7 +4,7 @@ require_relative 'rail_fence_cipher'
 # rubocop:enable all
 class RailFenceCipherTest < Minitest::Test
   def test_encode_with_empty_string
-    assert_equal '', RailFenceCipher.encode('', 4)
+    assert_equal '', RailFenceCipher.encode('', 6)
   end
 
   def test_encode_with_one_rail
@@ -37,7 +37,7 @@ class RailFenceCipherTest < Minitest::Test
   end
 
   def test_decode_with_empty_string
-    skip
+    # skip
     assert_equal '', RailFenceCipher.decode('', 4)
   end
 
