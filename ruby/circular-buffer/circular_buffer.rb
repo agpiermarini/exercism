@@ -10,10 +10,10 @@ class CircularBuffer
         data = @buffer[@read][:data]
         @read += 1 and return data
       else
-        raise CircularBuffer::BufferEmptyException.new
+        raise BufferEmptyException
       end
     rescue NoMethodError
-      raise CircularBuffer::BufferEmptyException.new
+      raise BufferEmptyException
     end
   end
 
@@ -22,15 +22,14 @@ class CircularBuffer
       @buffer[@write][:data] = data
       increment_write and return data
     else
-      raise CircularBuffer::BufferFullException.new
+      raise BufferFullException
     end
   end
 
   def write!(data)
     return write(data) unless buffer_full?
     @buffer[0][:data] = data
-    @buffer.insert(-1, @buffer.delete_at(0))
-    @write = @buffer.length - 1 and return data
+    @buffer.insert(-1, @buffer.delete_at(0)) and return data
   end
 
   def clear
@@ -40,7 +39,7 @@ class CircularBuffer
 
   private
     def buffer_full?
-      !@buffer.last[:data].nil?
+      @buffer.last[:data]
     end
 
     def increment_write
