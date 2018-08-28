@@ -4,22 +4,22 @@ require_relative 'change'
 # Common test data version: 1.1.0 52cf1cf
 class ChangeTest < Minitest::Test
   def test_single_coin_change
-    skip
+    # skip
     assert_equal [25], Change.generate([1, 5, 10, 25, 100], 25)
   end
 
   def test_multiple_coin_change
-    skip
+    # skip
     assert_equal [5, 10], Change.generate([1, 5, 10, 25, 100], 15)
   end
 
   def test_change_with_lilliputian_coins
-    skip
+    # skip
     assert_equal [4, 4, 15], Change.generate([1, 4, 15, 20, 50], 23)
   end
 
   def test_change_with_lower_elbonia_coins
-    skip
+    # skip
     assert_equal [21, 21, 21], Change.generate([1, 5, 10, 21, 25], 63)
   end
 
@@ -29,32 +29,32 @@ class ChangeTest < Minitest::Test
   end
 
   def test_possible_change_without_unit_coins_available
-    skip
+    # skip
     assert_equal [2, 2, 2, 5, 10], Change.generate([2, 5, 10, 20, 50], 21)
   end
 
   def test_another_possible_change_without_unit_coins_available
-    skip
+    # skip
     assert_equal [4, 4, 4, 5, 5, 5], Change.generate([4, 5], 27)
   end
 
   def test_no_coins_make_0_change
-    skip
+    # skip
     assert_equal [], Change.generate([1, 5, 10, 21, 25], 0)
   end
 
   def test_error_testing_for_change_smaller_than_the_smallest_of_coins
-    skip
+    # skip
     assert_equal -1, Change.generate([5, 10], 3)
   end
 
   def test_error_if_no_combination_can_add_up_to_target
-    skip
+    # skip
     assert_equal -1, Change.generate([5, 10], 94)
   end
 
   def test_cannot_find_negative_change_values
-    skip
+    # skip
     assert_equal -1, Change.generate([1, 2, 5], -5)
   end
 
@@ -76,13 +76,14 @@ class ChangeTest < Minitest::Test
   # http://ruby-doc.org/docs/ruby-doc-bundle/UsersGuide/rg/constants.html
 
   def test_bookkeeping
-    skip
+    # skip
     assert_equal 2, BookKeeping::VERSION
   end
 end
 
 class NodeTest < Minitest::Test
   def test_it_exists
+    # skip
     coins = [1, 5, 10, 25]
     total = 100
     node = Node.new(coins, total)
@@ -96,29 +97,24 @@ end
 
 class BtreeTest < Minitest::Test
   def test_it_exists
+    # skip
     coins = [1, 5, 10, 25]
     total = 35
-    btree = Btree.new
+    root = Node.new(coins, total)
+    btree = Btree.new(root)
 
     assert_instance_of Btree, btree
-    assert_nil btree.root
+    assert_instance_of Node, btree.root
   end
 
   def test_it_can_generate_branches
+    # skip
     coins = [1, 5, 10, 25]
     total = 35
-    btree = Btree.new.generate(coins, total)
+    btree = Btree.new(Node.new(coins, total))
 
     assert_instance_of Node, btree.root
     btree.root.children.each { | c | assert_instance_of Node, c }
     btree.root.children.each { | c | assert_equal total - c.coins.last, c.total }
-  end
-
-  def test_it_can_find_solutions
-    coins = [2, 5, 10]
-    total = 21
-    solutions = Btree.new.generate(coins, total).find_solutions
-
-    solutions.each { | solution | assert_equal total, solution.sum }
   end
 end
