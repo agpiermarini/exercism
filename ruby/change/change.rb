@@ -22,51 +22,42 @@
 # end
 
 class Node
-  attr_reader :total, :children, :current_coin
-  def initialize(coins, total, current_coin = nil)
+  attr_reader :total, :children, :coins
+  def initialize(coins, total)
     @coins        = coins
     @total        = total
-    @current_coin = current_coin
     @children     = []
   end
 
   def append
-    @coins.each_with_index do | coin_value, index |
-      new_total = @total - coin_value
-      new_node = Node.new(@coins[0..index], new_total, coin_value)
+    coins.each_with_index do | coin_value, index |
+      new_total = total - coin_value
       if new_total >= 0
-        @children.push(new_node)
+        new_node = Node.new(coins[0..index], new_total)
+        children.push(new_node)
         new_node.append
       end
     end
   end
-
-  def leaf?
-    @children.empty?
-  end
 end
 
 class Btree
-  attr_reader :root, :solutions
+  attr_reader :root
   def initialize
     @root  = nil
     @solutions = []
   end
 
   def generate(coins, total)
-    @root = Node.new(coins, total) if @root.nil?
-    @root.append and return self
+    @root = Node.new(coins, total) if root.nil?
+    root.append and return self
   end
 
-  def find_solutions(node = @root, coins = nil)
-    if node.leaf? && node.total == 0
-      coins.push(node.current_coin) if node.current_coin
-      @solutions.push(coins)
-    elsif node.current_coin.nil?
-      node.children.each { | child | find_solutions(child, []) }
-    elsif node.total >= 0
-      coins.push(node.current_coin)
-      node.children.each { | child | find_solutions(child, coins.dup) }
+  def find_solutions(children = @root.children, coins = [])
+    children.each do | node |
+      updated_coins = coins.dup.push(node.coins.last)
+      @solutions.push(updated_coins) if node.total == 0
+      find_solutions(node.children, updated_coins)
     end
     @solutions
   end

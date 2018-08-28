@@ -105,14 +105,13 @@ class BtreeTest < Minitest::Test
   end
 
   def test_it_can_generate_branches
-    skip
     coins = [1, 5, 10, 25]
     total = 35
     btree = Btree.new.generate(coins, total)
 
     assert_instance_of Node, btree.root
     btree.root.children.each { | c | assert_instance_of Node, c }
-    btree.root.children.each { | c | c.total == total - c.current_coin }
+    btree.root.children.each { | c | assert_equal total - c.coins.last, c.total }
   end
 
   def test_it_can_find_solutions
@@ -120,6 +119,6 @@ class BtreeTest < Minitest::Test
     total = 21
     solutions = Btree.new.generate(coins, total).find_solutions
 
-    solutions.each { | solution | solution.sum == total }
+    solutions.each { | solution | assert_equal total, solution.sum }
   end
 end
