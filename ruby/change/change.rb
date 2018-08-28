@@ -8,7 +8,7 @@ class Change
   private
     def self.find_solutions(children = btree.root.children, coins = [])
       children.each do | node |
-        updated_coins = coins.dup.push(node.coins.last)
+        updated_coins = coins.dup.unshift(node.coins.first)
         solutions.push(updated_coins) if node.total == 0
         find_solutions(node.children, updated_coins)
       end
@@ -38,6 +38,19 @@ class Change
     end
 end
 
+class Btree
+  attr_reader :root
+  def initialize(root)
+    @root  = root
+    generate
+  end
+
+  private
+    def generate
+      root.append and return self
+    end
+end
+
 class Node
   attr_reader :coins, :total, :children
   def initialize(coins, total)
@@ -49,26 +62,13 @@ class Node
   def append
     coins.each_with_index do | coin_value, index |
       new_total = total - coin_value
-      new_child(coins[0..index], new_total).append if new_total >= 0
+      new_child(coins[index..-1], new_total).append if new_total >= 0
     end
   end
 
   private
     def new_child(coins, total)
       children.push(Node.new(coins, total)).last
-    end
-end
-
-class Btree
-  attr_reader :root
-  def initialize(root)
-    @root  = root
-    generate
-  end
-
-  private
-    def generate
-      root.append and return self
     end
 end
 

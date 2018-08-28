@@ -81,20 +81,6 @@ class ChangeTest < Minitest::Test
   end
 end
 
-class NodeTest < Minitest::Test
-  def test_it_exists
-    # skip
-    coins = [1, 5, 10, 25]
-    total = 100
-    node = Node.new(coins, total)
-
-    assert_instance_of Node, node
-    assert_equal total, node.total
-    assert_instance_of Array, node.children
-    assert node.children.empty?
-  end
-end
-
 class BtreeTest < Minitest::Test
   def test_it_exists
     # skip
@@ -115,6 +101,20 @@ class BtreeTest < Minitest::Test
 
     assert_instance_of Node, btree.root
     btree.root.children.each { | c | assert_instance_of Node, c }
-    btree.root.children.each { | c | assert_equal total - c.coins.last, c.total }
+    btree.root.children.each { | c | assert_equal total - c.coins.first, c.total }
+  end
+end
+
+class NodeTest < Minitest::Test
+  def test_it_exists
+    # skip
+    coins = [1, 5, 10, 25]
+    total = 100
+    node = Node.new(coins, total)
+
+    assert_instance_of Node, node
+    assert_equal total, node.total
+    assert_instance_of Array, node.children
+    assert node.children.empty?
   end
 end
