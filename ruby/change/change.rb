@@ -26,7 +26,7 @@ class Change
     end
 
     def self.bad_total?
-      @total < 0 || @total < @coins.first
+      @total < 0 || @total < @coins.sort.first
     end
 
     def self.btree
