@@ -29,6 +29,20 @@ class CustomSet
   end
 
   def intersection(set2)
-    CustomSet.new(@set & set2.set)
+    new_set { @set & set2.set }
+  end
+
+  def difference(set2)
+    new_set { @set - set2.set }
+  end
+
+  def union(set2)
+    new_set { @set |= set2.set }
+  end
+
+  def new_set
+    CustomSet.new(yield)
   end
 end
+
+module BookKeeping; VERSION = 1; end
