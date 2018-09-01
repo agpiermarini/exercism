@@ -31,7 +31,6 @@ def score(dice, category):
                   }
     return dispatcher[category]
 
-
 def scoreYacht(dice):
     result = list(filter(lambda x: x == dice[0], dice))
     return 50 if len(result) == 5 else 0
