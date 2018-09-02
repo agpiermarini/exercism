@@ -22,14 +22,28 @@ class SgfTree(object):
         return True
 
 def parse(input_string):
-    return split_input(input_string)
+    properties = check_input(input_string)
+    return SgfTree(properties)
 
-def split_input(input_string):
-    if check_input(input_string):
-        return SgfTree()
+def check_input(input_string):
+    try:
+        contents = input_string[slice(1, -1, 1)]
+        if contents[0] == ";" and len(contents) >= 5:
+            return build_properties(contents.split('['))
+        else:
+            return {}
+    except:
+        return raise_error()
+
+def build_properties(split_string, i = 0, properties = {}):
+    if i > len(split_string) - 1:
+        return properties
     else:
-        raise ValueError("Improperly formatted string")
+        #have key capitalization check here
+        key = split_string[i][slice(1, len(split_string[i]), 1)]
+        value = split_string[i + 1][slice(0, -1, 1)]
+        properties[key] = properties.get(key, [value])
+        return build_properties(split_string, i + 2, properties)
 
-def check_input(input_string, i = 0):
-    split_string = input_string.split(";")
-    return split_string[0] == "("
+def raise_error():
+    raise ValueError("Improperly formatted string")

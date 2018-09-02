@@ -26,15 +26,15 @@ class SgfParsingTest(unittest.TestCase):
         expected = SgfTree()
         self.assertEqual(parse(input_string), expected)
 
-#     def test_single_node_tree(self):
-#         input_string = '(;A[B])'
-#         expected = SgfTree(properties={'A': ['B']})
-#         self.assertEqual(parse(input_string), expected)
+    def test_single_node_tree(self):
+        input_string = '(;A[B])'
+        expected = SgfTree(properties={'A': ['B']})
+        self.assertEqual(parse(input_string), expected)
 #
-#     def test_properties_without_delimiter(self):
-#         input_string = '(;A)'
-#         with self.assertRaisesWithMessage(ValueError):
-#             parse(input_string)
+    # def test_properties_without_delimiter(self):
+    #     input_string = '(;A)'
+    #     with self.assertRaisesWithMessage(ValueError):
+    #         parse(input_string)
 #
 #     def test_all_lowercase_property(self):
 #         input_string = '(;a[b])'
