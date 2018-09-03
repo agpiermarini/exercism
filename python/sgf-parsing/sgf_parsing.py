@@ -24,10 +24,31 @@ class SgfTree(object):
 
 def parse(input_string):
     contents = re.findall('(?<=;)[^;]{4,}(?=[;)])', input_string)
-    if input_string == "(;)" or len(contents) > 0:
-        return SgfTree(contents)
+    if input_string == "(;)":
+        return SgfTree()
+    elif len(contents) > 0:
+        properties = generate_properties(contents.pop(0).split("["))
+        children   = generate_children(contents)
+        return SgfTree(properties, children)
     else:
         return raise_error()
+
+def generate_properties(array):
+    key    = array.pop(0)
+    values = append_values(array)
+    return {key: values}
+
+def append_values(array):
+    values = []
+    for i in array:
+        values.append(i[slice(0, -1, 1)])
+    return values
+
+def generate_children(array, children = []):
+    for i in array:
+        properties = generate_properties(i.split("["))
+        children.append(SgfTree(properties))
+    return children
 
 def raise_error():
     raise ValueError("Improperly formatted string")
