@@ -25,16 +25,16 @@ class SgfParsingTest(unittest.TestCase):
         input_string = '(;)'
         expected = SgfTree()
         self.assertEqual(parse(input_string), expected)
-
+#
     def test_single_node_tree(self):
         input_string = '(;A[B])'
         expected = SgfTree(properties={'A': ['B']})
         self.assertEqual(parse(input_string), expected)
 #
-    # def test_properties_without_delimiter(self):
-    #     input_string = '(;A)'
-    #     with self.assertRaisesWithMessage(ValueError):
-    #         parse(input_string)
+#     # def test_properties_without_delimiter(self):
+#     #     input_string = '(;A)'
+#     #     with self.assertRaisesWithMessage(ValueError):
+#     #         parse(input_string)
 #
 #     def test_all_lowercase_property(self):
 #         input_string = '(;a[b])'
@@ -45,7 +45,7 @@ class SgfParsingTest(unittest.TestCase):
 #         input_string = '(;Aa[b])'
 #         with self.assertRaisesWithMessage(ValueError):
 #             parse(input_string)
-#
+
 #     def test_two_nodes(self):
 #         input_string = '(;A[B];B[C])'
 #         expected = SgfTree(
@@ -55,31 +55,31 @@ class SgfParsingTest(unittest.TestCase):
 #             ]
 #         )
 #         self.assertEqual(parse(input_string), expected)
-#
-#     def test_two_child_trees(self):
-#         input_string = '(;A[B](;B[C])(;C[D]))'
-#         expected = SgfTree(
-#             properties={'A': ['B']},
-#             children=[
-#                 SgfTree({'B': ['C']}),
-#                 SgfTree({'C': ['D']}),
-#             ]
-#         )
-#         self.assertEqual(parse(input_string), expected)
-#
-#     def test_multiple_property_values(self):
-#         input_string = '(;A[b][c][d])'
-#         expected = SgfTree(
-#             properties={'A': ['b', 'c', 'd']}
-#         )
-#         self.assertEqual(parse(input_string), expected)
-#
-#     def test_escaped_property(self):
-#         input_string = '(;A[\]b\nc\nd\t\te \n\]])'
-#         expected = SgfTree(
-#             properties={'A': [']b\nc\nd  e \n]']}
-#         )
-#         self.assertEqual(parse(input_string), expected)
+# # #
+# #     def test_two_child_trees(self):
+# #         input_string = '(;A[B](;B[C])(;C[D]))'
+# #         expected = SgfTree(
+# #             properties={'A': ['B']},
+# #             children=[
+# #                 SgfTree({'B': ['C']}),
+# #                 SgfTree({'C': ['D']}),
+# #             ]
+# #         )
+# #         self.assertEqual(parse(input_string), expected)
+# #
+# #     def test_multiple_property_values(self):
+# #         input_string = '(;A[b][c][d])'
+# #         expected = SgfTree(
+# #             properties={'A': ['b', 'c', 'd']}
+# #         )
+# #         self.assertEqual(parse(input_string), expected)
+# #
+# #     def test_escaped_property(self):
+# #         input_string = '(;A[\]b\nc\nd\t\te \n\]])'
+# #         expected = SgfTree(
+# #             properties={'A': [']b\nc\nd  e \n]']}
+# #         )
+# #         self.assertEqual(parse(input_string), expected)
 #
     # Utility functions
     def setUp(self):
