@@ -36,12 +36,14 @@ def parse(input_string):
 def generate_properties(array):
     key    = array.pop(0)
     values = append_values(array)
+    print({key: values})
     return {key: values}
 
 def append_values(array):
     values = []
     for i in array:
-        values.append(i[slice(0, -1, 1)])
+        # values.append(i[slice(0, -1, 1)])
+        values.append(re.findall('^(.*?)]', i)[0])
     return values
 
 def generate_children(array, children = []):

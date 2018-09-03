@@ -55,18 +55,18 @@ class SgfParsingTest(unittest.TestCase):
             ]
         )
         self.assertEqual(parse(input_string), expected)
-# # #
-# #     def test_two_child_trees(self):
-# #         input_string = '(;A[B](;B[C])(;C[D]))'
-# #         expected = SgfTree(
-# #             properties={'A': ['B']},
-# #             children=[
-# #                 SgfTree({'B': ['C']}),
-# #                 SgfTree({'C': ['D']}),
-# #             ]
-# #         )
-# #         self.assertEqual(parse(input_string), expected)
-# #
+#
+    def test_two_child_trees(self):
+        input_string = '(;A[B](;B[C])(;C[D]))'
+        expected = SgfTree(
+            properties={'A': ['B']},
+            children=[
+                SgfTree({'B': ['C']}),
+                SgfTree({'C': ['D']}),
+            ]
+        )
+        self.assertEqual(parse(input_string), expected)
+#
 # #     def test_multiple_property_values(self):
 # #         input_string = '(;A[b][c][d])'
 # #         expected = SgfTree(
