@@ -24,6 +24,7 @@ class SgfTree(object):
 
 def parse(input_string):
     contents = re.findall('(?<=;)[^;]{4,}(?=[;)])', input_string)
+    print(contents)
     if input_string == "(;)":
         return SgfTree()
     elif len(contents) > 0:
@@ -34,16 +35,17 @@ def parse(input_string):
         return raise_error()
 
 def generate_properties(array):
+    print(array)
     key    = array.pop(0)
     values = append_values(array)
+    print(values)
     return {key:values} if key == key.upper() else raise_error()
 
 def append_values(array):
     values = []
     for i in array:
-        # values.append(i[slice(0, -1, 1)])
-        values.append(re.findall('^(.*?)]', i)[0])
-    print(values)
+        values.append(i[slice(0, -1, 1)].replace('\t', ' ').replace('\\', ''))
+        # values.append(re.findall('^(.*?)]', i)[0])
     return values
 
 def generate_children(array, children = []):
