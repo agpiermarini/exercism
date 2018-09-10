@@ -33,5 +33,5 @@ class BankAccount(object):
         self.active = False
 
     def checkAccountStatus(self):
-        if self.active == False:
+        if self.active == False or self.active == None:
             raise ValueError()
