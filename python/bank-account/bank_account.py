@@ -1,7 +1,10 @@
+import threading
+
 class BankAccount(object):
     def __init__(self):
         self.balance = 0
         self.active = None
+        self.lock = threading.RLock()
 
     def get_balance(self):
         self.checkAccountStatus()
@@ -15,14 +18,16 @@ class BankAccount(object):
         if amount < 0:
             raise ValueError()
         else:
-            self.balance += amount
+            with self.lock:
+                self.balance += amount
 
     def withdraw(self, amount):
         self.checkAccountStatus()
         if amount < 0 or amount > self.balance:
             raise ValueError()
         else:
-            self.balance -= amount
+            with self.lock:
+                self.balance -= amount
 
     def close(self):
         self.active = False
