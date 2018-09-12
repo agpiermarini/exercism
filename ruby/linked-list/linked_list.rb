@@ -19,15 +19,14 @@ class Deque
 
   def shift
     return clear_list if list_length_one?
-    new_head, value, = @head.next, @head.value
+    new_head, value = @head.next, @head.value
     @head = new_head
     value
   end
 
   def unshift(value)
     return set_head(value) if list_empty?
-    old_head = @head
-    new_head = Node.new(value)
+    old_head, new_head = @head, Node.new(value)
     @head, @head.next, old_head.previous = new_head, old_head, new_head
   end
 
