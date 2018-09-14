@@ -8,13 +8,15 @@ class Dominoes
 
   private
     def self.proper_chain?(chain)
-      return false if chain[0][0] != chain[-1][-1]
+      chain[0][0] == chain[-1][-1] ? check_links(chain) : false
+    end
+
+    def self.check_links(chain)
       0.upto(chain.length - 2).all? { | i | chain[i][-1] == chain[i + 1][0] }
     end
 
     def self.special_case(dominoe)
-      return [] if dominoe.empty?
-      dominoe[0][0] == dominoe[0][-1] ? dominoe : nil
+      dominoe.empty? || dominoe[0][0] == dominoe[0][-1] ? dominoe : nil
     end
 
     def self.calculate_dominoe_permutations(input_dominoes)
