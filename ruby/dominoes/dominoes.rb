@@ -1,18 +1,15 @@
 class Dominoes
   def self.chain(input_dominoes)
-    return special_case(input_dominoes) if input_dominoes.length <= 1
+    return special_case(input_dominoes) if input_dominoes.count <= 1
     dominoe_permutations = calculate_dominoe_permutations(input_dominoes)
-    index_permutations = calculate_index_permutations(input_dominoes.count)
+    index_permutations   = calculate_index_permutations(input_dominoes.count)
     find_solution(dominoe_permutations, index_permutations)
   end
 
   private
     def self.proper_chain?(chain)
       return false if chain[0][0] != chain[-1][-1]
-      0.upto(chain.length - 2).all? do | index |
-        current_dominoe, next_dominoe = chain[index], chain[index + 1]
-        current_dominoe[-1] == next_dominoe[0]
-      end
+      0.upto(chain.length - 2).all? { | i | chain[i][-1] == chain[i + 1][0] }
     end
 
     def self.special_case(dominoe)
@@ -33,7 +30,7 @@ class Dominoes
     def self.find_solution(dominoe_permutations, index_permutations)
       dominoe_permutations.each do | permutation |
         index_permutations.each do | selections |
-          chain = selections.map.with_index { | sel, index | permutation[index][sel] }
+          chain = selections.map.with_index { | sel, i | permutation[i][sel] }
           return chain if proper_chain?(chain)
         end
       end
