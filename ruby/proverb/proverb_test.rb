@@ -52,7 +52,7 @@ class ProverbTest < Minitest::Test
   end
 
   def test_an_optional_qualifier_in_the_final_consequence
-    skip
+    # skip
     chain = %w(nail shoe horse rider message battle kingdom)
     proverb = Proverb.new(*chain, qualifier: 'horseshoe')
     expected = "For want of a nail the shoe was lost.\n" \
@@ -64,7 +64,7 @@ class ProverbTest < Minitest::Test
       'And all for the want of a horseshoe nail.'
     assert_equal expected, proverb.to_s
   end
-
+  
   def test_proverb_is_same_each_time
     # skip
     proverb = Proverb.new('nail', 'shoe')

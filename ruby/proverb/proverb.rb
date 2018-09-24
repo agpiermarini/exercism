@@ -1,7 +1,8 @@
 class Proverb
   def Proverb.new(*args)
     proverb = [*args].map { |word| LINES[word] }
-    proverb.push("And all for the want of a #{[*args].first}.")
+    qualifier = [*args].last.class == Hash ? "#{[*args].last[:qualifier]} " : nil
+    proverb.push("And all for the want of a #{qualifier}#{[*args].first}.")
     proverb.compact.uniq.join('')
   end
 end
