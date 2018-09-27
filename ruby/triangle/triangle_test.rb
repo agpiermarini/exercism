@@ -112,6 +112,6 @@ class TriangleTest < Minitest::Test
 
   def test_degenerate_triangle_must_have_two_sides_that_sum_to_size_of_third
     triangle = Triangle.new([5, 6, 10])
-    refute triangle.degenerate?, "Expected 'true', triangle [5, 6, 10] is not degenerate."
+    refute triangle.degenerate?, "Expected 'false', triangle [5, 6, 10] is not degenerate."
   end
 end
