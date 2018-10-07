@@ -24,26 +24,30 @@ TEXT
   end
 
   def verses(start, finish = start, song = "")
-    return song if start < finish
+    return song[0..-2] if start < finish
       if start == 2
 song += <<-TEXT
 2 bottles of beer on the wall, 2 bottles of beer.
 Take one down and pass it around, 1 bottle of beer on the wall.
+
 TEXT
       elsif start == 1
 song += <<-TEXT
 1 bottle of beer on the wall, 1 bottle of beer.
 Take it down and pass it around, no more bottles of beer on the wall.
+
 TEXT
       elsif start == 0
 song += <<-TEXT
 No more bottles of beer on the wall, no more bottles of beer.
 Go to the store and buy some more, 99 bottles of beer on the wall.
+
 TEXT
       else
 song += <<-TEXT
 #{start} bottles of beer on the wall, #{start} bottles of beer.
-Take one down and pass it around, #{start - 1} bottles of beer on the wall.\n
+Take one down and pass it around, #{start - 1} bottles of beer on the wall.
+
 TEXT
     end
     verses(start-1, finish, song)
