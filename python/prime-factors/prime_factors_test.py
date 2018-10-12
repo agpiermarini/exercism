@@ -20,7 +20,7 @@ class PrimeFactorsTest(unittest.TestCase):
 
     def test_product_of_primes_and_non_primes(self):
         self.assertEqual(prime_factors(12), [2, 2, 3])
-    
+
     def test_product_of_primes(self):
         self.assertEqual(prime_factors(901255), [5, 17, 23, 461])
 

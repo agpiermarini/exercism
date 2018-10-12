@@ -1,21 +1,15 @@
-import math
+def prime_factors(natural_number):
+    primes, factors  = primes_up_to(xrange(2, natural_number + 1)), []
 
-def prime_factors(natural_number, primes = [], factors = [], index = 0):
-    if len(primes) == 0:
-        primes  = primes_up_to(xrange(2, natural_number + 1))
-        factors = []
+    for i in primes:
+        while natural_number % i == 0:
+            natural_number /= i
+            factors.append(i)
 
-    if len(primes) == 0 or index == len(primes):
-        return factors
-    elif natural_number % primes[index] == 0:
-        natural_number /= primes[index]
-        factors.append(primes[index])
-        return prime_factors(natural_number, primes, factors, index)
+        if natural_number == 1:
+            return factors
 
-    if natural_number == 1:
-        return factors
-    else:
-        return prime_factors(natural_number, primes, factors, index + 1)
+    return factors
 
 def primes_up_to(values, index = 0):
     if len(values) <= 1 or values[index] ** 2 > values[-1]:
