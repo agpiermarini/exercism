@@ -25,5 +25,4 @@ def primes_up_to(values, index = 0):
     return primes_up_to(values, index  + 1)
 
 def remove_multiples(values, index):
-    return list(filter(lambda x: x == values[index] or x % values[index] != 0, values))
-    # return [x for x in values if x == values[index] or x % values[index] != 0]
+    return [x for x in values if x == values[index] or x % values[index] != 0]
