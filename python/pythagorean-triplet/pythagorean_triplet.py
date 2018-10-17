@@ -1,22 +1,21 @@
 def primitive_triplets(number_in_triplet):
-    # find all solutions for prod of 2 numbers where prod = num/2
     pairs, triplets = [], []
     for i in range(1, number_in_triplet/2):
         if (number_in_triplet/2) % i == 0:
-            pair = [i]
-            pair.append((number_in_triplet/2)/i)
-            pairs.append(pair)
+            pair = [i, (number_in_triplet/2)/i]
+            pair.sort()
+            if pair not in pairs:
+                pairs.append(pair)
 
-    pairs = find_coprimes(pairs)
+    filter_noncoprimes(pairs)
 
     for i in pairs:
-        triplet = [number_in_triplet]
-        triplet.append(i[1]**2 - i[0]**2)
-        triplet.append(i[1]**2 + i[0]**2)
+        a, c = abs(i[1]**2 - i[0]**2), i[1]**2 + i[0]**2
+        triplet = [a, number_in_triplet, c]
         triplet.sort()
-        triplets.append(triplet)
+        triplets.append(tuple(triplet))
 
-    return triplets
+    return set(triplets)
 
 def triplets_in_range(range_start, range_end):
     pass
@@ -26,11 +25,14 @@ def is_triplet(triplet):
     pass
 
 
-def find_coprimes(pairs):
-    for index, i in enumerate(pairs):
-        if i[1] - i[0] % 2 == 0 or i[1] == i[0] or not is_coprime(i):
-            pairs.pop(index)
-    return pairs
+def filter_noncoprimes(pairs, i = 0):
+    if i == len(pairs):
+        return pairs
+    elif pairs[i][1] - pairs[i][0] % 2 == 0 or pairs[i][1] == pairs[i][0] or not is_coprime(pairs[i]):
+        del pairs[i]
+        filter_noncoprimes(pairs, i)
+    else:
+        filter_noncoprimes(pairs, i + 1)
 
 def is_coprime(pair):
     for i in primes_up_to(range(2, pair[1] + 1)):

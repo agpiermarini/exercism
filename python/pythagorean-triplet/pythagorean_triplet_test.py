@@ -19,7 +19,7 @@
 # a primitive pythagorean triplet since 3,4 and 5 don't have a common factor.
 # On the other hand, (6,8,10), although a pythagorean triplet, is not primitive
 # since 2 divides all three components.
-#
+
 # A method for finding all primitive pythagorean triplet is given in wikipedia
 # (http://en.wikipedia.org/wiki/Pythagorean_triple#Generating_a_triple). The
 # triplet a=(m^2-n^2), b=2*m*n and c=(m^2+n^2), where m and n are coprime and
@@ -30,7 +30,7 @@
 # The function primitive_triplets should then use the formula above with b set
 # to its argument and find all possible pairs (m,n) such that m>n, m-n is odd,
 # b=2*m*n and m and n are coprime.
-#
+
 # =============================================================================
 
 import unittest
@@ -43,10 +43,10 @@ from pythagorean_triplet import (
 
 
 class PythagoreanTripletTest(unittest.TestCase):
-    def test_triplet1(self):
-        ans = set([(3, 4, 5)])
-        self.assertEqual(primitive_triplets(4), ans)
-
+    # def test_triplet1(self):
+    #     ans = set([(3, 4, 5)])
+    #     self.assertEqual(primitive_triplets(4), ans)
+    #
     # def test_triplet2(self):
     #     ans = set([(13, 84, 85), (84, 187, 205), (84, 437, 445),
     #                (84, 1763, 1765)])
@@ -57,11 +57,11 @@ class PythagoreanTripletTest(unittest.TestCase):
     #                (420, 1189, 1261), (420, 1739, 1789), (420, 4891, 4909),
     #                (420, 11021, 11029), (420, 44099, 44101)])
     #     self.assertEqual(primitive_triplets(420), ans)
-    #
-    # def test_triplet4(self):
-    #     ans = set([(175, 288, 337), (288, 20735, 20737)])
-    #     self.assertEqual(primitive_triplets(288), ans)
-    #
+
+    def test_triplet4(self):
+        ans = set([(175, 288, 337), (288, 20735, 20737)])
+        self.assertEqual(primitive_triplets(288), ans)
+
     # def test_range1(self):
     #     ans = set([(3, 4, 5), (6, 8, 10)])
     #     self.assertEqual(triplets_in_range(1, 10), ans)
