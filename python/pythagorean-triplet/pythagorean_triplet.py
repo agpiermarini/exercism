@@ -48,7 +48,8 @@ def is_coprime(pair):
 def primes_up_to(values, index = 0):
     if len(values) <= 1 or values[index] ** 2 > values[-1]:
         return values
-    remove_multiples(values, index)
+    else:
+        values = remove_multiples(values, index)
     return primes_up_to(values, index  + 1)
 
 def remove_multiples(values, index):
