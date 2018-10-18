@@ -24,8 +24,8 @@ class PrimeFactorsTest(unittest.TestCase):
     def test_product_of_primes(self):
         self.assertEqual(prime_factors(901255), [5, 17, 23, 461])
 
-    # def test_factors_include_a_large_prime(self):
-    #     self.assertEqual(prime_factors(93819012551), [11, 9539, 894119])
+    def test_factors_include_a_large_prime(self):
+        self.assertEqual(prime_factors(93819012551), [11, 9539, 894119])
 
 
 if __name__ == '__main__':
