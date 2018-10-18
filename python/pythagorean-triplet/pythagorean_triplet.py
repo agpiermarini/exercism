@@ -1,38 +1,43 @@
+import math
+
 def primitive_triplets(number_in_triplet):
-    pairs, triplets = [], []
+    pairs, triplets = [], set()
+
     for i in range(1, number_in_triplet/2):
         if (number_in_triplet/2) % i == 0:
-            pair = [i, (number_in_triplet/2)/i]
-            pair.sort()
-            if pair not in pairs:
-                pairs.append(pair)
+            pair = sorted((i, (number_in_triplet/2)/i))
+            pairs.append(pair)
 
     filter_noncoprimes(pairs)
 
     for i in pairs:
-        a, c = abs(i[1]**2 - i[0]**2), i[1]**2 + i[0]**2
-        triplet = [a, number_in_triplet, c]
-        triplet.sort()
-        triplets.append(tuple(triplet))
+        a, c = abs(i[0]**2 - i[1]**2), i[0]**2 + i[1]**2
+        triplet = sorted((a, number_in_triplet, c))
+        triplets.add(tuple(triplet))
 
-    return set(triplets)
+    return triplets
 
 def triplets_in_range(range_start, range_end):
-    pass
-
+    triplet_range, triplets = range(range_start, range_end + 1), set()
+    for i in triplet_range:
+        for j in triplet_range:
+            k = math.sqrt(i**2 + j**2)
+            if k.is_integer() and range_start <= k <= range_end:
+                triplets.add(tuple(sorted((i, j, k))))
+    return triplets
 
 def is_triplet(triplet):
-    pass
-
+    trip_list = sorted(triplet)
+    return trip_list[0]**2 + trip_list[1]**2 == trip_list[2]**2
 
 def filter_noncoprimes(pairs, i = 0):
     if i == len(pairs):
         return pairs
-    elif pairs[i][1] - pairs[i][0] % 2 == 0 or pairs[i][1] == pairs[i][0] or not is_coprime(pairs[i]):
+    elif pairs[i][1] - pairs[i][0] % 2 == 0 or not is_coprime(pairs[i]):
         del pairs[i]
-        filter_noncoprimes(pairs, i)
     else:
-        filter_noncoprimes(pairs, i + 1)
+        i += 1
+    filter_noncoprimes(pairs, i)
 
 def is_coprime(pair):
     for i in primes_up_to(range(2, pair[1] + 1)):
@@ -43,8 +48,7 @@ def is_coprime(pair):
 def primes_up_to(values, index = 0):
     if len(values) <= 1 or values[index] ** 2 > values[-1]:
         return values
-    else:
-        values = remove_multiples(values, index)
+    remove_multiples(values, index)
     return primes_up_to(values, index  + 1)
 
 def remove_multiples(values, index):
