@@ -1,29 +1,29 @@
 import math
 
-def primitive_triplets(number_in_triplet):
+def primitive_triplets(b):
     pairs, triplets = [], set()
 
-    for i in range(1, number_in_triplet/2):
-        if (number_in_triplet/2) % i == 0:
-            pair = sorted((i, (number_in_triplet/2)/i))
+    for i in range(1, b/2):
+        if (b/2) % i == 0:
+            pair = sorted((i, (b/2)/i))
             pairs.append(pair)
 
     filter_noncoprimes(pairs)
 
     for i in pairs:
         a, c = abs(i[0]**2 - i[1]**2), i[0]**2 + i[1]**2
-        triplet = sorted((a, number_in_triplet, c))
-        triplets.add(tuple(triplet))
+        triplet = (a, b, c) if b > a else (b, a, c)
+        triplets.add(triplet)
 
     return triplets
 
 def triplets_in_range(range_start, range_end):
-    triplet_range, triplets = range(range_start, range_end + 1), set()
-    for i in triplet_range:
-        for j in triplet_range:
+    triplets = set()
+    for i in range(range_start, range_end + 1):
+        for j in range(i, range_end + 1):
             k = math.sqrt(i**2 + j**2)
             if k.is_integer() and range_start <= k <= range_end:
-                triplets.add(tuple(sorted((i, j, k))))
+                triplets.add((i,j,k))
     return triplets
 
 def is_triplet(triplet):
