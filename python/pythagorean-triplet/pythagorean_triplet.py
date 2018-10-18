@@ -8,7 +8,7 @@ def primitive_triplets(b):
             pair = sorted((i, (b/2)/i))
             pairs.append(pair)
 
-    filter_noncoprimes(pairs)
+    pairs = filter_noncoprimes(pairs)
 
     for i in pairs:
         a, c = abs(i[0]**2 - i[1]**2), i[0]**2 + i[1]**2
@@ -30,18 +30,12 @@ def is_triplet(triplet):
     trip_list = sorted(triplet)
     return trip_list[0]**2 + trip_list[1]**2 == trip_list[2]**2
 
-def filter_noncoprimes(pairs, i = 0):
-    if i == len(pairs):
-        return pairs
-    elif pairs[i][1] - pairs[i][0] % 2 == 0 or not is_coprime(pairs[i]):
-        del pairs[i]
-    else:
-        i += 1
-    filter_noncoprimes(pairs, i)
+def filter_noncoprimes(pairs):
+    return [x for x in pairs if is_coprime(x)]
 
 def is_coprime(pair):
     for i in primes_up_to(range(2, pair[1] + 1)):
-        if pair[1] % i == 0 and pair[0] % i == 0:
+        if pair[1] - pair[0] % 2 == 0 or pair[1] % i == 0 and pair[0] % i == 0:
             return False
     return True
 
