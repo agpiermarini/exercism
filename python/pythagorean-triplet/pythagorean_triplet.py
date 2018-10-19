@@ -1,9 +1,8 @@
 import math
 
 def primitive_triplets(b):
-    pairs    = calculate_mn_pairs(b)
-    triplets = calculate_primitives(pairs, b)
-    return triplets
+    pairs = calculate_mn_pairs(b)
+    return primitives_for(pairs, b)
 
 def triplets_in_range(range_start, range_end):
     triplets = set()
@@ -26,7 +25,7 @@ def calculate_mn_pairs(b):
             pairs.append(pair)
     return filter_noncoprimes(pairs)
 
-def calculate_primitives(pairs, b):
+def primitives_for(pairs, b):
     triplets = set()
     for i in filter_noncoprimes(pairs):
         a, c = abs(i[0]**2 - i[1]**2), i[0]**2 + i[1]**2
