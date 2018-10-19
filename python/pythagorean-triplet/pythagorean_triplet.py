@@ -1,6 +1,7 @@
 import math
 
 def primitive_triplets(b):
+    check_b(b)
     mn_pairs = calculate_mn_pairs(b)
     return primitives_for(mn_pairs, b)
 
@@ -18,11 +19,7 @@ def is_triplet(triplet):
     return triplet_list[0]**2 + triplet_list[1]**2 == triplet_list[2]**2
 
 def calculate_mn_pairs(b):
-    pairs = []
-    for i in range(1, b/2):
-        if (b/2) % i == 0:
-            pair = sorted((i, (b/2)/i))
-            pairs.append(pair)
+    pairs = [sorted((i, (b/2)/i)) for i in range(1, b/2) if (b/2) % i == 0]
     return filter_noncoprimes(pairs)
 
 def primitives_for(mn_pairs, b):
@@ -37,17 +34,21 @@ def filter_noncoprimes(pairs):
     return [x for x in pairs if is_coprime(x)]
 
 def is_coprime(pair):
-    for i in primes_up_to(range(2, pair[1] + 1)):
+    for i in find_primes(range(2, pair[1] + 1)):
         if pair[1] - pair[0] % 2 == 0 or pair[1] % i == 0 and pair[0] % i == 0:
             return False
     return True
 
-def primes_up_to(values, index = 0):
+def find_primes(values, index = 0):
     if len(values) <= 1 or values[index] ** 2 > values[-1]:
         return values
     else:
         values = remove_multiples(values, index)
-    return primes_up_to(values, index  + 1)
+    return find_primes(values, index  + 1)
 
 def remove_multiples(values, index):
     return [x for x in values if x == values[index] or x % values[index] != 0]
+
+def check_b(b):
+    if b % 4 != 0:
+        raise ValueError("B must be divisible by four.")

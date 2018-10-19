@@ -65,7 +65,7 @@ class PythagoreanTripletTest(unittest.TestCase):
     def test_range1(self):
         ans = set([(3, 4, 5), (6, 8, 10)])
         self.assertEqual(triplets_in_range(1, 10), ans)
-    
+
     def test_range2(self):
         ans = set([(57, 76, 95), (60, 63, 87)])
         self.assertEqual(triplets_in_range(56, 95), ans)
@@ -78,21 +78,21 @@ class PythagoreanTripletTest(unittest.TestCase):
 
     def test_is_triplet3(self):
         self.assertIs(is_triplet((924, 43, 925)), True)
-    #
-    # def test_odd_number(self):
-    #     with self.assertRaisesWithMessage(ValueError):
-    #         primitive_triplets(5)
-    #
-    # # Utility functions
-    # def setUp(self):
-    #     try:
-    #         self.assertRaisesRegex
-    #     except AttributeError:
-    #         self.assertRaisesRegex = self.assertRaisesRegexp
-    #
-    # def assertRaisesWithMessage(self, exception):
-    #     return self.assertRaisesRegex(exception, r".+")
-    #
+
+    def test_odd_number(self):
+        with self.assertRaisesWithMessage(ValueError):
+            primitive_triplets(5)
+
+    # Utility functions
+    def setUp(self):
+        try:
+            self.assertRaisesRegex
+        except AttributeError:
+            self.assertRaisesRegex = self.assertRaisesRegexp
+
+    def assertRaisesWithMessage(self, exception):
+        return self.assertRaisesRegex(exception, r".+")
+    
 
 if __name__ == '__main__':
     unittest.main()
