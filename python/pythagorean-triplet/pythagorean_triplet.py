@@ -22,9 +22,9 @@ def calculate_mn_pairs(b):
     pairs = [sorted((i, (b/2)/i)) for i in range(1, b/2) if (b/2) % i == 0]
     return filter_noncoprimes(pairs)
 
-def primitives_for(mn_pairs, b):
+def primitives_for(pairs, b):
     triplets = set()
-    for i in filter_noncoprimes(mn_pairs):
+    for i in filter_noncoprimes(pairs):
         a, c = abs(i[0]**2 - i[1]**2), i[0]**2 + i[1]**2
         triplet = (a, b, c) if b > a else (b, a, c)
         triplets.add(triplet)
