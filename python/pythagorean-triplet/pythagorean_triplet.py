@@ -1,8 +1,8 @@
 import math
 
 def primitive_triplets(b):
-    pairs = calculate_mn_pairs(b)
-    return primitives_for(pairs, b)
+    mn_pairs = calculate_mn_pairs(b)
+    return primitives_for(mn_pairs, b)
 
 def triplets_in_range(range_start, range_end):
     triplets = set()
@@ -14,8 +14,8 @@ def triplets_in_range(range_start, range_end):
     return triplets
 
 def is_triplet(triplet):
-    trip_list = sorted(triplet)
-    return trip_list[0]**2 + trip_list[1]**2 == trip_list[2]**2
+    triplet_list = sorted(triplet)
+    return triplet_list[0]**2 + triplet_list[1]**2 == triplet_list[2]**2
 
 def calculate_mn_pairs(b):
     pairs = []
@@ -25,9 +25,9 @@ def calculate_mn_pairs(b):
             pairs.append(pair)
     return filter_noncoprimes(pairs)
 
-def primitives_for(pairs, b):
+def primitives_for(mn_pairs, b):
     triplets = set()
-    for i in filter_noncoprimes(pairs):
+    for i in filter_noncoprimes(mn_pairs):
         a, c = abs(i[0]**2 - i[1]**2), i[0]**2 + i[1]**2
         triplet = (a, b, c) if b > a else (b, a, c)
         triplets.add(triplet)
