@@ -40,14 +40,10 @@ def is_coprime(pair):
     return True
 
 def find_primes(values, index = 0):
-    if len(values) <= 1 or values[index] ** 2 > values[-1]:
-        return values
-    else:
-        values = remove_multiples(values, index)
-    return find_primes(values, index  + 1)
+    for i in values:
+        values = [x for x in values if i == x or x % i != 0]
+    return values
 
-def remove_multiples(values, index):
-    return [x for x in values if x == values[index] or x % values[index] != 0]
 
 def check_b(b):
     if b % 4 != 0:
