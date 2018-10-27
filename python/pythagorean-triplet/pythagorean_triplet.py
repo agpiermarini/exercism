@@ -44,7 +44,6 @@ def find_primes(values, index = 0):
         values = [x for x in values if i == x or x % i != 0]
     return values
 
-
 def check_b(b):
     if b % 4 != 0:
         raise ValueError("B must be divisible by four.")
