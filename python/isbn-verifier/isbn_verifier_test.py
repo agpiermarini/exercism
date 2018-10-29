@@ -6,7 +6,7 @@ from isbn_verifier import verify
 # Tests adapted from `problem-specifications//canonical-data.json` @ v2.7.0
 
 class IsbnVerifierTest(unittest.TestCase):
-
+    
     def test_valid_isbn_number(self):
         self.assertIs(verify('3-598-21508-8'), True)
 
