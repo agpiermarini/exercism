@@ -27,17 +27,13 @@ def decode(string):
 #             multiplier = int(i)
 #     return decoded
 
-
-
 # def decode(string):
 #     characters = [1 if i == '' else i for i in re.split('([a-zA-Z ])', string)]
 #     print(characters)
 
-
 # def encode(string):
 #     groups  = re.findall("((.)\\2*)", string)
 #     return ''.join([f'{len(i[0])}{i[1]}' if len(i[0]) > 1 else i[1] for i in groups])
-
 
 # def encode(string):
 #     encoded, groups = '', re.findall("((.)\\2*)", string)
