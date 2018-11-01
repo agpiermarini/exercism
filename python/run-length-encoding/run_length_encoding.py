@@ -14,7 +14,14 @@ def decode(string):
         except:
             decoded += multiplier * i if multiplier else i
             multiplier = None
-    return decoded
+    return decoded'
+
+
+# def encode(s):
+#     return sub(r'(.)\1+', lambda x: str(len(x.group(0))) + x.group(1), string)
+
+# def decode(string):
+#     return re.sub(r'(\d+)(\D)', lambda x: x.group(2) * int(x.group(1)), string)
 
 # def decode(string):
 #     characters = ['1' if i == '' else i for i in re.split('([a-zA-Z ])', string)]
