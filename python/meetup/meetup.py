@@ -1,21 +1,18 @@
-import time
+from time import strptime
 from datetime import date
 from calendar import monthrange
 
-def meetup_day(year, month, day, which):
+def meetup_day(yr, mnth, day, which):
     try:
-        for i in date_range(year, month, which):
-            if date(year, month, i).weekday() == time.strptime(day, "%A").tm_wday:
-                return date(year, month, i)
+        for i in date_range(yr, mnth, which):
+            if date(yr, mnth, i).weekday() == strptime1(day, "%A").tm_wday:
+                return date(yr, mnth, i)
     except:
         raise MeetupDayException("No such date")
 
-def date_range(year, month, which):
-    if which == "last":
-        last_day = monthrange(year, month)[1]
-        return range(last_day - 6, last_day + 1)
-    else:
-        return DATE_RANGE[which]
+def date_range(yr, mnth, which):
+    max = monthrange(yr, mnth)[1]
+    return range(max - 6, max + 1) if which == "last" else DATE_RANGE[which]
 
 class MeetupDayException(Exception):
     pass
