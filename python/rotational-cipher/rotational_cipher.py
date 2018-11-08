@@ -1,17 +1,11 @@
 def rotate(text, key):
     new_text = ""
     for i in text:
-        new_value = ord(i) + key
-        if 122 > ord(i) < 65:
-            new_text += i
-        elif i.isupper():
-            if new_value > 90:
-                new_text += chr(65 + (new_value - 91))
-            else:
-                new_text += chr(new_value)
+        val = ord(i) + key
+        if i.isupper():
+            new_text += chr(65 + (val % 91))  if val > 90  else chr(val)
+        elif i.islower():
+            new_text += chr(97 + (val % 123)) if val > 122 else chr(val)
         else:
-            if new_value > 122:
-                new_text += chr(97 + (new_value - 123))
-            else:
-                new_text += chr(new_value)
+            new_text += i
     return new_text
