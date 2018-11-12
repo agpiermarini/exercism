@@ -1,2 +1,3 @@
+import re
 def abbreviate(words):
-    pass
+    return "".join(re.findall('[A-Z]', words.title()))
