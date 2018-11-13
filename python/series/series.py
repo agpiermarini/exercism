@@ -7,6 +7,6 @@ def slices(series, length):
         if len(slice) == length:
             array.append(series[i:i+length])
         else:
-            return array
+            break
 
     return array
