@@ -1,5 +1,4 @@
 // Package bob Exercism challenge
-
 package bob
 
 import (
@@ -11,14 +10,18 @@ import (
 func Hey(remark string) string {
 	remarkTrimmed := strings.TrimSpace(remark)
 
-	if remarkTrimmed == "" {
+	isSilent := len(remarkTrimmed) == 0
+	isYelling := IsYelling(remarkTrimmed)
+	isAsking := strings.HasSuffix(remarkTrimmed, "?")
+
+	switch {
+	case isSilent:
 		return "Fine. Be that way!"
-	} else if IsYelling(remarkTrimmed) {
-		if IsAsking(remarkTrimmed) {
-			return "Calm down, I know what I'm doing!"
-		}
+	case isYelling && isAsking:
+		return "Calm down, I know what I'm doing!"
+	case isYelling:
 		return "Whoa, chill out!"
-	} else if IsAsking(remarkTrimmed) {
+	case isAsking:
 		return "Sure."
 	}
 	return "Whatever."
@@ -29,9 +32,4 @@ func IsYelling(remark string) bool {
 	// Match on one or more uppercase leters and no lowercase
 	re := regexp.MustCompile("^[^a-z]+[A-Z].*")
 	return re.MatchString(remark)
-}
-
-// IsAsking evaluates whether remark ends with a question
-func IsAsking(remark string) bool {
-	return strings.HasSuffix(remark, "?")
 }
