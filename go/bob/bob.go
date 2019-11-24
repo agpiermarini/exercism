@@ -13,31 +13,25 @@ func Hey(remark string) string {
 
 	if remarkTrimmed == "" {
 		return "Fine. Be that way!"
-	} else if isYelling(remark) {
-		if isAsking(remarkTrimmed) {
+	} else if IsYelling(remarkTrimmed) {
+		if IsAsking(remarkTrimmed) {
 			return "Calm down, I know what I'm doing!"
 		}
 		return "Whoa, chill out!"
-	} else if isAsking(remarkTrimmed) {
+	} else if IsAsking(remarkTrimmed) {
 		return "Sure."
-	} else {
-		return "Whatever."
 	}
+	return "Whatever."
 }
 
-// isYelling evaluates whether remark is aggressive
-func isYelling(remark string) bool {
-	return hasLetters(remark) && remark == strings.ToUpper(remark)
+// IsYelling evaluates whether remark is aggressive
+func IsYelling(remark string) bool {
+	// Match on one or more uppercase leters and no lowercase
+	re := regexp.MustCompile("^[^a-z]+[A-Z].*")
+	return re.MatchString(remark)
 }
 
-// hasLetters evaluates whether remark has one or more characters
-func hasLetters(remark string) bool {
-	hasMatch, err := regexp.Match(`[a-zA-Z]`, []byte(remark))
-	return hasMatch && err == nil
-}
-
-// isAsking evaluates whether remark ends with a question
-func isAsking(remark string) bool {
-	lastChar := remark[len(remark)-1:]
-	return lastChar == "?"
+// IsAsking evaluates whether remark ends with a question
+func IsAsking(remark string) bool {
+	return strings.HasSuffix(remark, "?")
 }
