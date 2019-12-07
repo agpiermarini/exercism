@@ -2,26 +2,20 @@
 package acronym
 
 import (
-	"regexp"
 	"strings"
 	"unicode"
 )
 
 // Abbreviate function returns the acronym of a string
 func Abbreviate(s string) string {
-	modString := CaptureChars(s)
+	cleanedString := CleanString(s)
+	acronym := BuildAcronym(cleanedString)
 
-	re := regexp.MustCompile("\\B(.)")
-	leadingChars := re.ReplaceAllString(modString, "")
-
-	acronym := RemoveSpaces(leadingChars)
-
-	return strings.ToUpper(acronym)
+	return acronym
 }
 
-// CaptureChars function plucks letter characters from string
-// Also replaces hyphens with a space
-func CaptureChars(s string) string {
+// CleanString function
+func CleanString(s string) string {
 	var b strings.Builder
 	b.Grow(len(s))
 	for _, ch := range s {
@@ -34,12 +28,14 @@ func CaptureChars(s string) string {
 	return b.String()
 }
 
-// RemoveSpaces removes spaces from a string
-func RemoveSpaces(str string) string {
+// BuildAcronym function
+func BuildAcronym(s string) string {
+	titleString := strings.Title(strings.ToLower(s))
+
 	var b strings.Builder
-	b.Grow(len(str))
-	for _, ch := range str {
-		if !unicode.IsSpace(ch) {
+	b.Grow(len(titleString))
+	for _, ch := range titleString {
+		if unicode.IsUpper(ch) {
 			b.WriteRune(ch)
 		}
 	}
