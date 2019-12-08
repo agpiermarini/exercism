@@ -8,15 +8,15 @@ import (
 
 // Abbreviate function returns the initialism of a string
 func Abbreviate(s string) string {
-	re := regexp.MustCompile("[\\s-]")
-	words := re.Split(s, -1)
+	reSplit := regexp.MustCompile("[\\s-]")
+	words := reSplit.Split(s, -1)
 
 	var initialism strings.Builder
 	initialism.Grow(len(words))
 
+	reFind := regexp.MustCompile("[A-Za-z]")
 	for _, word := range words {
-		re := regexp.MustCompile("[A-Za-z]")
-		firstLetter := re.FindString(word)
+		firstLetter := reFind.FindString(word)
 		if len(firstLetter) > 0 {
 			initialism.WriteString(firstLetter)
 		}
