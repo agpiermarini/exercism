@@ -1,27 +1,19 @@
 // Package diffsquares Exercism challenge
 package diffsquares
 
-// Difference function returns the difference of squares
-func Difference(number int) int {
-	squareOfSums := SquareOfSum(number)
-	sumOfSquares := SumOfSquares(number)
-	return squareOfSums - sumOfSquares
+// Difference function returns square of sums of first n natural numbers minus
+// sum of squares of first n natural numbers of a given integer
+func Difference(num int) int {
+	return SquareOfSum(num) - SumOfSquares(num)
 }
 
-// SquareOfSum functions returns the square of sums of a given array of ints
-func SquareOfSum(number int) int {
-	var result int
-	for i := 1; i <= number; i++ {
-		result = result + i
-	}
-	return result * result
+// SquareOfSum functions returns the square of sums of first n natural numbers of given integer
+func SquareOfSum(num int) int {
+	sum := num * (num + 1) / 2
+	return sum * sum
 }
 
-// SumOfSquares functions returns the sum of the squares of a given array of ints
-func SumOfSquares(number int) int {
-	var result int
-	for i := 1; i <= number; i++ {
-		result = result + (i * i)
-	}
-	return result
+// SumOfSquares functions returns the sum of the squares of first n natural numbers of given integer
+func SumOfSquares(num int) int {
+	return num * (num + 1) * (2*num + 1) / 6
 }
