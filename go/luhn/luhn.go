@@ -6,18 +6,37 @@ import (
 	"strconv"
 )
 
-// Valid function determines if a number is valid according to the luhn algorithm
+// Valid function takes a string input and returns a boolean as to
+// whether the string is valid according to the Luhn Algorithm
 func Valid(input string) bool {
-	re1, re2 := regexp.MustCompile("\\s"), regexp.MustCompile("([^\\d\\s])")
-	numbers, nan := re1.ReplaceAllString(input, ""), re2.FindString(input)
+	cleanInput := CleanInput(input)
 
-	if len(numbers) <= 1 || len(nan) > 0 {
+	if len(cleanInput) <= 1 {
 		return false
 	}
 
+	return CheckSum(cleanInput)
+}
+
+// CleanInput function takes a string; if input is limited to strings and spaces, it
+// returns the input stripped of spaces, else it returns an empty string
+func CleanInput(input string) string {
+	re1, re2 := regexp.MustCompile("\\s"), regexp.MustCompile("([^\\d\\s])")
+
+	cleanInput := re1.ReplaceAllString(input, "")
+	nan := re2.FindString(input)
+
+	if len(nan) > 0 {
+		return ""
+	}
+	return cleanInput
+}
+
+// CheckSum function returns bool as to whether input is valid according to the Luhn algorithm
+func CheckSum(input string) bool {
 	var result int
-	for i, j := 1, len(numbers)-1; j >= 0; i, j = i+1, j-1 {
-		num, _ := strconv.Atoi(string(numbers[j]))
+	for i, j := 1, len(input)-1; j >= 0; i, j = i+1, j-1 {
+		num, _ := strconv.Atoi(string(input[j]))
 		if i%2 == 0 {
 			if num > 4 {
 				result += num - 9
@@ -27,6 +46,5 @@ func Valid(input string) bool {
 		}
 		result += num
 	}
-
 	return result%10 == 0
 }
